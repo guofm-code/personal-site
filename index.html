@@ -94,7 +94,16 @@
             opacity: 0; animation: fadeIn 1s 1.2s forwards;
         }
         @keyframes fadeIn { to { opacity: 1; } }
-        .hero-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeIn 0.8s 1.5s forwards; }
+        .hero-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeIn 0.8s 1.5s forwards; margin-bottom: 48px; }
+        .hero-anchors {
+            display: flex; gap: 28px; justify-content: center; flex-wrap: wrap;
+            opacity: 0; animation: fadeIn 0.8s 2s forwards;
+        }
+        .hero-anchors a {
+            font-size: 13px; color: var(--text-muted); text-decoration: none;
+            cursor: pointer; transition: color 0.12s; font-weight: 500;
+        }
+        .hero-anchors a:hover { color: var(--text); }
         .btn-primary, .btn-secondary {
             padding: 11px 26px; border-radius: 6px; font-size: 14px;
             font-weight: 500; font-family: inherit; cursor: pointer; text-decoration: none;
@@ -216,6 +225,36 @@
         }
         .top-nav a:hover { color: var(--text); }
 
+        /* ── 左侧分段指示器（桌面端）── */
+        .section-dots {
+            display: none;
+        }
+        @media (min-width: 1100px) {
+            .section-dots {
+                display: flex; flex-direction: column; gap: 12px;
+                position: fixed; left: 32px; top: 50%; transform: translateY(-50%);
+                z-index: 997;
+            }
+            .section-dot {
+                width: 10px; height: 10px; border-radius: 50%;
+                background: var(--border); cursor: pointer;
+                transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+                position: relative;
+            }
+            .section-dot:hover { transform: scale(1.4); }
+            .section-dot.active {
+                background: var(--accent);
+                box-shadow: 0 0 0 4px var(--accent-light);
+            }
+            .section-dot .dot-label {
+                position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+                font-size: 12px; font-weight: 500; color: var(--text-secondary);
+                white-space: nowrap; opacity: 0; transition: opacity 0.15s;
+                pointer-events: none;
+            }
+            .section-dot:hover .dot-label { opacity: 1; }
+        }
+
         @media (max-width: 600px) {
             .top-nav { gap: 18px; }
             .top-nav a { font-size: 13px; }
@@ -244,6 +283,14 @@
         <a onclick="scrollToSection('contact')">联系</a>
     </div>
 
+    <!-- 左侧分段指示器（桌面端） -->
+    <div class="section-dots" id="sectionDots">
+        <div class="section-dot" data-section="projects"><span class="dot-label">项目</span></div>
+        <div class="section-dot" data-section="timeline"><span class="dot-label">经历</span></div>
+        <div class="section-dot" data-section="positioning"><span class="dot-label">关于我</span></div>
+        <div class="section-dot" data-section="contact"><span class="dot-label">联系</span></div>
+    </div>
+
     <div class="container">
 
         <!-- Hero -->
@@ -256,6 +303,12 @@
             <div class="hero-buttons">
                 <a href="#projects" class="btn-primary">看我的项目</a>
                 <a href="#contact" class="btn-secondary">联系我</a>
+            </div>
+            <div class="hero-anchors">
+                <a onclick="scrollToSection('projects')">项目</a>
+                <a onclick="scrollToSection('timeline')">经历</a>
+                <a onclick="scrollToSection('positioning')">关于我</a>
+                <a onclick="scrollToSection('contact')">联系</a>
             </div>
         </section>
 
@@ -468,6 +521,20 @@
             window.addEventListener('scroll', () => {
                 const heroBottom = hero.getBoundingClientRect().bottom;
                 nav.classList.toggle('visible', heroBottom < 0);
+            });
+        })();
+
+        // ── 左侧分段指示器 ──
+        (function(){
+            const dots = document.querySelectorAll('.section-dot');
+            const sections = [...dots].map(d => document.getElementById(d.dataset.section)).filter(Boolean);
+            dots.forEach(d => d.addEventListener('click', () => scrollToSection(d.dataset.section)));
+            window.addEventListener('scroll', () => {
+                let active = null;
+                sections.forEach((s, i) => {
+                    if (s.getBoundingClientRect().top < window.innerHeight * 0.4) active = i;
+                });
+                dots.forEach((d, i) => d.classList.toggle('active', i === active));
             });
         })();
     </script>
