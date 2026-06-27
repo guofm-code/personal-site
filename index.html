@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郭方铭 — 诊断型 AI 产品经理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #171717;
+            --gray-600: #4d4d4d;
+            --gray-500: #666666;
+            --gray-400: #808080;
+            --gray-200: #d4d4d4;
+            --gray-100: #ebebeb;
+            --gray-50: #fafafa;
+            --white: #ffffff;
+            --blue: #0a72ef;
+            --blue-light: #ebf5ff;
+            --green-light: #f0fdf4;
+            --green-text: #108c3d;
+            --shadow-border: 0px 0px 0px 1px rgba(0,0,0,0.08);
+            --shadow-card: 0px 0px 0px 1px rgba(0,0,0,0.08), 0px 2px 2px rgba(0,0,0,0.04);
+            --shadow-card-hover: 0px 0px 0px 1px rgba(0,0,0,0.08), 0px 2px 2px rgba(0,0,0,0.04), 0px 8px 8px -8px rgba(0,0,0,0.04);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Geist', system-ui, -apple-system, sans-serif;
+            background: var(--white); color: var(--black);
+            line-height: 1.6; -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 120px 0 80px; text-align: center;
+        }
+        .hero h1 {
+            font-size: 44px; font-weight: 600; letter-spacing: -1.8px;
+            color: var(--black); line-height: 1.1; margin-bottom: 12px;
+        }
+        .hero .role {
+            font-size: 18px; font-weight: 500; color: var(--black);
+            margin-bottom: 24px;
+        }
+        .hero .pitch {
+            font-size: 16px; color: var(--gray-600); max-width: 480px;
+            margin: 0 auto 40px; line-height: 1.7;
+        }
+        .hero-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary, .btn-secondary {
+            padding: 10px 24px; border-radius: 6px; font-size: 14px;
+            font-weight: 500; font-family: inherit; cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--black); color: var(--white); border: none;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-secondary {
+            background: var(--white); color: var(--black); border: none;
+            box-shadow: var(--shadow-border);
+        }
+        .btn-secondary:hover { background: var(--gray-50); }
+
+        /* ── Projects ── */
+        .section { padding: 80px 0; }
+        .section-title {
+            font-size: 22px; font-weight: 600; letter-spacing: -0.4px;
+            margin-bottom: 6px; color: var(--black);
+        }
+        .section-subtitle {
+            font-size: 14px; color: var(--gray-500); margin-bottom: 32px;
+        }
+        .project-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .project-card {
+            background: var(--white); border-radius: 10px; padding: 24px;
+            box-shadow: var(--shadow-card); text-decoration: none;
+            color: inherit; display: block; transition: box-shadow 0.15s;
+        }
+        .project-card:hover { box-shadow: var(--shadow-card-hover); }
+        .project-card .pc-badge {
+            font-size: 11px; font-weight: 500; padding: 2px 9px;
+            border-radius: 9999px; display: inline-block; margin-bottom: 10px;
+            font-family: 'Geist Mono', monospace;
+        }
+        .pc-badge.diagnosis { background: #fef3f2; color: #ff5b4f; }
+        .pc-badge.data { background: var(--blue-light); color: #0068d6; }
+        .pc-badge.tool { background: var(--green-light); color: var(--green-text); }
+        .pc-badge.agent { background: #fdf2f8; color: #de1d8d; }
+        .project-card h3 {
+            font-size: 16px; font-weight: 600; margin-bottom: 6px;
+            letter-spacing: -0.2px;
+        }
+        .project-card p {
+            font-size: 13px; color: var(--gray-500); line-height: 1.6;
+        }
+        .project-card .pc-link {
+            font-size: 12px; color: var(--blue); font-weight: 500;
+            margin-top: 10px; display: inline-block;
+        }
+
+        /* ── Positioning ── */
+        .positioning {
+            background: var(--gray-50); border-radius: 12px;
+            padding: 40px 36px; margin: 0;
+        }
+        .positioning h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; letter-spacing: -0.4px; }
+        .positioning p { font-size: 14px; color: var(--gray-600); margin-bottom: 10px; line-height: 1.7; }
+        .positioning ul { list-style: none; padding: 0; }
+        .positioning li {
+            font-size: 14px; color: var(--black); padding: 4px 0 4px 22px;
+            position: relative; line-height: 1.7;
+        }
+        .positioning li::before {
+            content: '→'; position: absolute; left: 0; top: 4px;
+            color: var(--blue); font-weight: 500;
+        }
+
+        /* ── Contact ── */
+        .contact { padding: 40px 0 80px; text-align: center; }
+        .contact-links {
+            display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+        }
+        .contact-links a {
+            font-size: 14px; color: var(--gray-600); text-decoration: none;
+            padding: 6px 14px; border-radius: 6px; transition: background 0.12s;
+        }
+        .contact-links a:hover { background: var(--gray-50); color: var(--black); }
+
+        .footer-note {
+            font-size: 12px; color: var(--gray-400); margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 64px 0 48px; }
+            .hero h1 { font-size: 32px; letter-spacing: -1.2px; }
+            .project-grid { grid-template-columns: 1fr; }
+            .section { padding: 48px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1>郭方铭</h1>
+            <p class="role">诊断型 AI 产品经理</p>
+            <p class="pitch">
+                把模糊的「AI 不好用」翻译成<br>可定位、可修复、可验证的问题。
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-primary">看我的项目</a>
+                <a href="#contact" class="btn-secondary">联系我</a>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section" id="projects">
+            <h2 class="section-title">我做过的 AI 产品</h2>
+            <p class="section-subtitle">四个项目，同一个核心能力：把业务问题翻译成 AI 方案，并验证它真的有效。</p>
+            <div class="project-grid">
+
+                <a class="project-card" href="#">
+                    <span class="pc-badge diagnosis">诊断</span>
+                    <h3>金晓生AI问答诊断</h3>
+                    <p>上线后发现AI在金融场景里胡编法规。拆解RAG四链路，定位4个P0级根因缺陷，输出改进PRD。沉淀了可复用的AI产品诊断方法论。</p>
+                </a>
+
+                <a class="project-card" href="#">
+                    <span class="pc-badge data">数据管线</span>
+                    <h3>金融知识库AI生产</h3>
+                    <p>设计了从数据源→清洗→AI处理→上线的全自动化管线。1500+条法规的治理从纯手工变85%自动化，法规模块上线后月活增长180%。</p>
+                </a>
+
+                <a class="project-card" href="https://github.com/guofm-code/ai-eval-workbench" target="_blank" rel="noopener">
+                    <span class="pc-badge tool">在线试用</span>
+                    <h3>AI产品评测工作台</h3>
+                    <p>将金晓生诊断方法论产品化。输入产品定义，自动生成覆盖真实场景的评测用例。FastAPI + 原生前端，完整一个人搭建。</p>
+                    <span class="pc-link">在线试用 →</span>
+                </a>
+
+                <a class="project-card" href="#">
+                    <span class="pc-badge agent">Agent</span>
+                    <h3>业务流程AI自动化</h3>
+                    <p>搭了活动报名自动化（6节点管线）、客户情报监控（三层分类+双版本输出）、课程研发Skills工具链。运营从专职变兼任。</p>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Honest Positioning -->
+        <section class="positioning">
+            <h2>我不是「标准 AI PM」</h2>
+            <p>没有大厂经历，title 不是产品经理，金融工程本科。</p>
+            <p>但过去一年，我做了大多数 AI PM 没机会做的事：</p>
+            <ul>
+                <li>不是调用 API 写 Prompt——是拆解 AI 系统链路，定位根因级缺陷</li>
+                <li>不是被动接需求——是主动设计评测体系，量化 AI 的真实表现</li>
+                <li>不是只画原型——是从零搭出工具（这个网站就是我自己写的）</li>
+            </ul>
+            <p style="margin-top:16px;">如果你在找一个只会写 PRD 的 PM，我不是。<br>如果你需要一个能把「AI 为什么不行」讲清楚、并知道怎么让它行的人——我们聊聊。</p>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact" id="contact">
+            <div class="contact-links">
+                <a href="https://github.com/guofm-code" target="_blank" rel="noopener">GitHub</a>
+                <a href="mailto:guofm@example.com">邮件</a>
+            </div>
+            <p class="footer-note">© 2026 郭方铭 · 自己写的，没用模板</p>
+        </section>
+
+    </div>
+</body>
+</html>
