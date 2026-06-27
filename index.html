@@ -207,24 +207,6 @@
         .contact-text { font-size: 14px; color: var(--text-secondary); margin-top: 12px; }
         .footer-note { font-size: 12px; color: var(--text-muted); margin-top: 40px; }
 
-        /* ── 顶部导航条 ── */
-        .top-nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 998;
-            background: var(--bg); border-bottom: 1px solid var(--border);
-            padding: 0 24px; height: 0; overflow: hidden;
-            display: flex; align-items: center; justify-content: center; gap: 28px;
-            transition: height 0.25s ease, box-shadow 0.25s ease;
-        }
-        .top-nav.visible {
-            height: 44px;
-            box-shadow: 0px 1px 3px rgba(0,0,0,0.04);
-        }
-        .top-nav a {
-            font-size: 14px; font-weight: 500; color: var(--text-secondary);
-            text-decoration: none; cursor: pointer; transition: color 0.12s;
-        }
-        .top-nav a:hover { color: var(--text); }
-
         /* ── 左侧分段指示器（桌面端）── */
         .section-dots {
             display: none;
@@ -256,8 +238,6 @@
         }
 
         @media (max-width: 600px) {
-            .top-nav { gap: 18px; }
-            .top-nav a { font-size: 13px; }
             .hero { padding: 100px 0 64px; }
             .hero h1 { font-size: 34px; letter-spacing: -1.2px; }
             .project-grid { grid-template-columns: 1fr; }
@@ -274,13 +254,6 @@
         <button class="theme-btn" data-theme="dark" title="暗黑">🌙</button>
         <button class="theme-btn" data-theme="warm" title="阅读">📖</button>
         <button class="theme-btn" data-theme="auto" title="跟随系统">⚙️</button>
-    </div>
-
-    <div class="top-nav" id="topNav">
-        <a onclick="scrollToSection('projects')">项目</a>
-        <a onclick="scrollToSection('timeline')">经历</a>
-        <a onclick="scrollToSection('positioning')">关于我</a>
-        <a onclick="scrollToSection('contact')">联系</a>
     </div>
 
     <!-- 左侧分段指示器（桌面端） -->
@@ -510,21 +483,11 @@
             document.querySelectorAll('.tl-item').forEach(el => tlObserver.observe(el));
         })();
 
-        // ── 顶部导航条 ──
+        // ── 左侧分段指示器 ──
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        (function(){
-            const nav = document.getElementById('topNav');
-            const hero = document.querySelector('.hero');
-            window.addEventListener('scroll', () => {
-                const heroBottom = hero.getBoundingClientRect().bottom;
-                nav.classList.toggle('visible', heroBottom < 0);
-            });
-        })();
-
-        // ── 左侧分段指示器 ──
         (function(){
             const dots = document.querySelectorAll('.section-dot');
             const sections = [...dots].map(d => document.getElementById(d.dataset.section)).filter(Boolean);
