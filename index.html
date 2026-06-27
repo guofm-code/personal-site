@@ -94,30 +94,19 @@
             opacity: 0; animation: fadeIn 1s 1.2s forwards;
         }
         @keyframes fadeIn { to { opacity: 1; } }
-        .hero-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeIn 0.8s 1.5s forwards; margin-bottom: 48px; }
-        .hero-anchors {
-            display: flex; gap: 28px; justify-content: center; flex-wrap: wrap;
-            opacity: 0; animation: fadeIn 0.8s 2s forwards;
+        .hero-buttons {
+            display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+            opacity: 0; animation: fadeIn 0.8s 1.5s forwards;
         }
-        .hero-anchors a {
-            font-size: 13px; color: var(--text-muted); text-decoration: none;
-            cursor: pointer; transition: color 0.12s; font-weight: 500;
-        }
-        .hero-anchors a:hover { color: var(--text); }
-        .btn-primary, .btn-secondary {
-            padding: 11px 26px; border-radius: 6px; font-size: 14px;
+        .hero-btn {
+            padding: 10px 28px; border-radius: 8px; font-size: 14px;
             font-weight: 500; font-family: inherit; cursor: pointer; text-decoration: none;
-            transition: all 0.15s;
+            border: none; background: var(--bg-alt); color: var(--text);
+            box-shadow: var(--card-shadow); transition: all 0.15s;
         }
-        .btn-primary {
-            background: var(--text); color: var(--bg); border: none;
-        }
-        .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
-        .btn-secondary {
-            background: transparent; color: var(--text); border: none;
-            box-shadow: var(--card-shadow);
-        }
-        .btn-secondary:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-1px); }
+        .hero-btn:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-1px); }
+        .hero-btn.primary { background: var(--text); color: var(--bg); box-shadow: none; }
+        .hero-btn.primary:hover { opacity: 0.9; }
 
         /* ── Sections ── */
         .section { padding: 80px 0; }
@@ -274,14 +263,10 @@
                 把模糊的「AI 不好用」翻译成<br>可定位、可修复、可验证的问题。
             </p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn-primary">看我的项目</a>
-                <a href="#contact" class="btn-secondary">联系我</a>
-            </div>
-            <div class="hero-anchors">
-                <a onclick="scrollToSection('projects')">项目</a>
-                <a onclick="scrollToSection('timeline')">经历</a>
-                <a onclick="scrollToSection('positioning')">关于我</a>
-                <a onclick="scrollToSection('contact')">联系</a>
+                <a onclick="scrollToSection('projects')" class="hero-btn">项目</a>
+                <a onclick="scrollToSection('timeline')" class="hero-btn">经历</a>
+                <a onclick="scrollToSection('positioning')" class="hero-btn">关于我</a>
+                <a onclick="scrollToSection('contact')" class="hero-btn primary">联系</a>
             </div>
         </section>
 
